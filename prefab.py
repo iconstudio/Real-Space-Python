@@ -1,6 +1,6 @@
-import RsModules.RsBehavior as RsBehavior
+import behavior.RsBehavior as RsBehavior
 
-class RsObject(RsBehavior):
+class RsPrefab(RsBehavior):
 	sprite_index = None
 	layer = None
 
