@@ -1,4 +1,4 @@
-import behavior.RsBehavior as RsBehavior
+import behavior.RsBehavior
 
 class RsPrefab(RsBehavior):
 	sprite_index = None
