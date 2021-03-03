@@ -3,27 +3,30 @@ import sys
 import pygame
 import pygame.time as PyTime
 
-import src
-from RsSystem import game_system
-from scene import RsScene
-src.resolutions
+import constants
+import containers
+
 if __name__ == "__main__":
     pygame.init()
 
-    size = width, height = (640, 480)
     black = (0, 0, 0)
-    screen = pygame.display.set_mode(resolutions)
+    screen = pygame.display.set_mode(constants.Resolutions)
     absolute_timer = PyTime.Clock()
 
-    Scenes = game_system.Scenes
-    Start_scene = RsScene()
-    Scenes.append(Start_scene)
+    import Scenes.scene_intro as Intro
+    from Scenes.scene_intro import SceneIntro
 
-    Current_scene = Start_scene
+    Intro.storage += 7
+    Scenes = containers.Rooms
+    Current_scene = SceneIntro()
+    Scenes.append(Current_scene)
+
     if not Current_scene:
         raise RuntimeError("No scene found")
 
     Current_scene.onAwake()
+
+    # Start
     while Current_scene.running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -44,9 +47,11 @@ if __name__ == "__main__":
 
         pygame.display.flip()
         absolute_timer.tick()
-    Current_scene.onDestroy()
 
+    Current_scene.onDestroy()
     if 0 < len(Scenes):
         Current_scene = Scenes.pop()
+        Current_scene.onAwake()
 
     print("Program is ended.")
+    pygame.quit()
