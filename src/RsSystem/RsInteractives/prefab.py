@@ -1,8 +1,9 @@
+from RsSystem import game_system
 from behavior import RsBehavior
-import gear
+
 
 def prefab_register(Fab):
-    gear.Prefabs.append(Fab)
+    game_system.Prefabs.append(Fab)
  
 class RsPrefab(RsBehavior):
     def __init__(self, Sprite: object = None, Parent = None):

@@ -1,9 +1,3 @@
-from prefab import RsPrefab
-from layer import RsLayer
-import pygame.sprite as PySprite
-import utilities
-import gear
-
 class RsInstance(RsPrefab):
     def __init__(self, X: float = 0, Y: float = 0):
         self.__x:float = X

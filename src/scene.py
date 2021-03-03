@@ -1,4 +1,4 @@
-from behavior import RsBehavior
+from RsSystem.RsInteractives.behavior import RsBehavior
 from layer import RsLayer
 
 class RsScene(RsBehavior):

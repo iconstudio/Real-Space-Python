@@ -1,11 +1,12 @@
-from scene import RsScene
-from sprite import RsSprite
-from prefab import RsPrefab
-from scene import RsScene
+#! Initialization
+resolutions = {
+    "width": 640,
+    "height": 480
+}
 
 # Sprite texture group
-global Scenes
-Scenes: list[RsScene] = list()
+global ScenesPot
+ScenesPot: list[RsScene] = list()
 
 # Sprite texture group
 global Atlas
@@ -18,4 +19,3 @@ Prefabs: list[RsPrefab] = list()
 # All sounds
 global Audioes
 Audioes: list[object] = list()
-
