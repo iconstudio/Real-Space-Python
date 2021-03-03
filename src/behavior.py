@@ -1,5 +1,5 @@
 class RsBehavior(object):
-    name = str()
+    name = "RS Object"
 
     def __str__(self):
         return self.name
@@ -13,18 +13,18 @@ class RsBehavior(object):
     def onDestroy(self):
         ...
 
-    async def onUpdate(self, Time):
+    def onUpdate(self, Time):
         """onUpdate(time)"""
         ...
 
-    async def onUpdateLater(self, Time):
+    def onUpdateLater(self, Time):
         """onUpdateLater(time)"""
         ...
 
-    async def onDraw(self, Time):
+    def onDraw(self, Time):
         """onDraw(time)"""
         ...
 
-    async def onGUI(self, Time):
+    def onGUI(self, Time):
         """onGUI(time)"""
         ...

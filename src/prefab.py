@@ -1,31 +1,36 @@
 from behavior import RsBehavior
-import pygame.sprite as Sprite
+import gear
 
-
+def prefab_register(Fab):
+    gear.Prefabs.append(Fab)
+ 
 class RsPrefab(RsBehavior):
-    sprite_index = None
-
-    def __init__(self):
+    def __init__(self, Sprite: object = None, Parent = None):
+        self.sprite_index:object = Sprite
+        self.parent = Parent
         pass
 
+    def register(self):
+        prefab_register(self)
+    
     def onAwake(self):
         pass
 
     def onDestroy(self):
         pass
 
-    async def onUpdate(self, Time):
+    def onUpdate(self, Time):
         """onUpdate(time)"""
         pass
 
-    async def onUpdateLater(self, Time):
+    def onUpdateLater(self, Time):
         """onUpdateLater(time)"""
         pass
 
-    async def onDraw(self, Time):
+    def onDraw(self, Time):
         """onDraw(time)"""
         pass
 
-    async def onGUI(self, Time):
+    def onGUI(self, Time):
         """onGUI(time)"""
         pass
