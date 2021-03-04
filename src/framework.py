@@ -5,7 +5,7 @@ try:
     import pygame.constants as PyConstants
     from pygame.time import Clock
 except (ImportError, IOError):
-    print("No pygame mudule found.")
+    print("No pygame module found.")
 
 from Game.RsSystem.scene import Scene
 from Game.RsSystem import constants as RsConstants, containers as RsContainers
@@ -33,7 +33,6 @@ def endup():
     print("Program is ended.")
     pygame.quit()
 
-
 def startup():
     global RsScreen, RsRoom
 
@@ -45,6 +44,7 @@ def startup():
     absolute_timer = Clock()
 
     # Start
+    print(RsRoom)
     RsRoom.onAwake()
     while True:
         RsContainers.Events = pygame.event.get()
@@ -54,7 +54,7 @@ def startup():
             elif event.type == PyConstants.KEYDOWN and event.key == PyConstants.K_ESCAPE:
                 sys.exit()
             elif event.type == PyConstants.MOUSEBUTTONDOWN:
-                pass
+                room_goto_next()
             elif event.type == PyConstants.MOUSEBUTTONUP:
                 pass
 
@@ -67,3 +67,4 @@ def startup():
 
         PyDisplay.flip()
         absolute_timer.tick()
+

@@ -17,20 +17,6 @@ class Scene(object):
         self.EveryInstancesPot: list = []
         self.SpecificInstancesPot: dict[str, list] = {}
 
-        self.add_layer("Background")
-        self.add_layer("Doodad Below")
-        self.add_layer("Background")
-        self.add_layer("Tile Below")
-        self.add_layer("Trap")
-        self.add_layer("Tile")
-        self.add_layer("Entity")
-        self.add_layer("Player")
-        self.add_layer("Effect")
-        self.add_layer("Doodad Above")
-        self.add_layer("Effect Above")
-        self.add_layer("UI")
-        self.add_layer("System")
-
     def __iter__(self):
         return self
 
@@ -39,6 +25,9 @@ class Scene(object):
             return RsContainers.RoomOrder[self.index + 1]
         else:
             raise StopIteration
+
+    def __repr__(self) -> str:
+        return "Room " + self.name + " at (" + str(self.index) + ")"
 
     def pause(self):
         self.paused = True
