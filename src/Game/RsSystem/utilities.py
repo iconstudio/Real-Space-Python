@@ -3,12 +3,40 @@ import random
 from typing import Union
 
 
+def sqr(v) -> float:
+    return v * v
+
+
+def sign(x) -> int:
+    ret = 0
+    if x > 0:
+        ret = 1
+    elif x < 0:
+        ret = - 1
+    return ret
+
+
+def degtorad(degree: float) -> float:
+    return math.radians(degree * math.pi / 180)
+
+
+def radtodeg(radian: float) -> float:
+    return math.degrees(radian)
+
+
+def bezier4(t, x1, x2, x3, x4) -> float:
+    factor = 1 - t
+
+    return factor * (factor * (factor * x1 + t * x2)
+                     + t * (factor * x2 + t * x3)) + t * (factor * (factor * x2 + t * x3) + t * (factor * x3 + t * x4))
+
+
 def lengthdir_x(Length: float, Direction: float) -> float:
-    return math.cos(math.radians(Direction)) * Length
+    return math.cos(degtorad(Direction)) * Length
 
 
 def lengthdir_y(Length: float, Direction: float) -> float:
-    return -math.sin(math.radians(Direction)) * Length
+    return -math.sin(degtorad(Direction)) * Length
 
 
 def point_distance(X1: float, Y1: float, X2: float, Y2: float) -> float:
@@ -16,7 +44,7 @@ def point_distance(X1: float, Y1: float, X2: float, Y2: float) -> float:
 
 
 def point_direction(X1: float, Y1: float, X2: float, Y2: float) -> float:
-    return math.degrees(math.atan2(Y2 - Y1, X1 - X2))
+    return radtodeg(math.atan2(Y2 - Y1, X1 - X2))
 
 
 def irandom(n: Union[int, float]) -> int:
@@ -38,7 +66,6 @@ def probability_test(max: Union[int, float]) -> bool:
     return bool(irandom(max - 1) == 0)
 
 
-# choice random
 def choose(*args):
     length = len(args)
     if length <= 0:

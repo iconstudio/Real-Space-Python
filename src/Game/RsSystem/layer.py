@@ -1,10 +1,7 @@
-from .prefab import RsPrefab
-
-
 class RsLayer(object):
-    def __init__(self, name: str = "Default"):
+    def __init__(self, name: str):
         self.name: str = name
-        self.storage: list[RsPrefab] = []
+        self.storage: list = []
 
     def __repr__(self) -> str:
         return "Layer " + self.name
@@ -17,18 +14,18 @@ class RsLayer(object):
         for Instance in self.storage:
             Instance.onDestroy()
 
-    async def onUpdate(self, time: int):
+    def onUpdate(self, time: int):
         for Instance in self.storage:
             Instance.onUpdate(time)
 
-    async def onUpdateLater(self, time: int):
+    def onUpdateLater(self, time: int):
         for Instance in self.storage:
             Instance.onUpdateLater(time)
 
-    async def onDraw(self, time: int):
+    def onDraw(self, time: int):
         for Instance in self.storage:
             Instance.onDraw(time)
 
-    async def onGUI(self, time: int):
+    def onGUI(self, time: int):
         for Instance in self.storage:
             Instance.onGUI(time)

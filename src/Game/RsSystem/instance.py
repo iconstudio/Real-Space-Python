@@ -1,7 +1,7 @@
 from typing import Optional
 
-from .prefab import RsPrefab
-from .layer import RsLayer
+from Game.RsSystem.layer import RsLayer
+from Game.RsSystem.prefab import RsPrefab
 from .utilities import *
 
 
@@ -36,7 +36,7 @@ class RsObject(object):
         self.layer = layer
 
         self.physical = RsPhysics(x, y)
-        
+
         self.sprite_index: object = None  # Not an original sprite
         self.image_angle: float = 0
         self.image_index: float = 0

@@ -1,17 +1,20 @@
-from typing import Union
-import pygame.image as PyImage
-import pygame.sprite as PySprite
 import json
+from typing import Union
 
-import pico2d.sdl2.sdlimage as RawImage
+import pygame.sprite as PySprite
+
 
 class RsSprite(object):
+    raw_data = PySprite.Sprite()
     pass
+
 
 sprite_list: dict = {}
 
-def load_image(filename:str, xo: float, yo:float) -> RawImage:
+
+def load_image(filename: str, xo: float, yo: float) -> RawImage:
     return RawImage()
+
 
 class LegacySprite(object):
     name: str = ""
@@ -65,8 +68,8 @@ class LegacySprite(object):
     def __repr__(self) -> str:
         return self.name
 
-    def draw(self, index: int or float, sx, sy, xscale = float(1), yscale = float(1), rot = float(0.0),
-             alpha = float(1.0)) -> None:
+    def draw(self, index: int or float, sx, sy, xscale=float(1), yscale=float(1), rot=float(0.0),
+             alpha=float(1.0)) -> None:
         dx = 0
         if not self.isSeparate:
             data = self.__data__[0]
@@ -89,7 +92,7 @@ class LegacySprite(object):
         return self.__data__
 
 
-def sprite_load(filepaths, name = str("default"), xoffset = None, yoffset = None, number = int(1)) -> Sprite:
+def sprite_load(filepaths, name=str("default"), xoffset=None, yoffset=None, number=int(1)) -> Sprite:
     global sprite_list
     new = LegacySprite(filepaths, number, xoffset, yoffset)
     new.name = name
@@ -106,7 +109,8 @@ def sprite_get(name: str) -> LegacySprite:
     return val
 
 
-def draw_sprite(spr: LegacySprite, index = int(0) or float(0), sx = int(0), sy = int(0), xscale = float(1), yscale = float(1), rot = float(0.0), alpha = float(1.0)) -> None:
+def draw_sprite(spr: LegacySprite, index=int(0) or float(0), sx=int(0), sy=int(0), xscale=float(1), yscale=float(1),
+                rot=float(0.0), alpha=float(1.0)) -> None:
     spr.draw(index, sx, sy, xscale, yscale, rot, alpha)
 
 

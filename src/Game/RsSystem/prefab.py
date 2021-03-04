@@ -1,8 +1,7 @@
 from typing import Optional
 
 
-class RsObject(object):
-    ...
+class RsObject(object): ...
 
 
 class RsPrefab(object):

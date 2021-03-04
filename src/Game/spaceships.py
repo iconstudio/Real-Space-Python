@@ -1,4 +1,4 @@
-from Game.prefab import RsObject
+from Game.RsSystem.prefab import RsObject
 
 
 class SPACESHIP_TYPES:
@@ -7,4 +7,3 @@ class SPACESHIP_TYPES:
 
 class spaceship(RsObject):
     pass
-
