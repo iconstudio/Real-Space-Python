@@ -1,9 +1,13 @@
-from scene import RsScene
-from prefab import RsPrefab
+from .prefab import RsPrefab
 
-# Sprite texture group
+
+# States
 global Rooms
-Rooms: list[RsScene] = list()
+Rooms = list()
+
+# Events
+global Events
+Events = list()
 
 # Sprite texture group
 global Atlas

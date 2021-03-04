@@ -1,34 +1,33 @@
 import sys
+import asyncio
 
 import pygame
-import pygame.time as PyTime
+from pygame.time import Clock
 
-import constants
-import containers
 
-if __name__ == "__main__":
+if __name__ is "__main__":
     pygame.init()
+    absolute_timer = Clock()
 
     black = (0, 0, 0)
-    screen = pygame.display.set_mode(constants.Resolutions)
-    absolute_timer = PyTime.Clock()
+    from Game import constants as RsConstants
+    screen = pygame.display.set_mode(RsConstants.Resolutions)
 
-    import Scenes.scene_intro as Intro
-    from Scenes.scene_intro import SceneIntro
+    from Game import containers as RsContainers
+    Stage = RsContainers.Rooms
 
-    Intro.storage += 7
-    Scenes = containers.Rooms
+    from Game.Scenes.scene_intro import SceneIntro
     Current_scene = SceneIntro()
-    Scenes.append(Current_scene)
+    Stage.append(Current_scene)
 
     if not Current_scene:
         raise RuntimeError("No scene found")
 
-    Current_scene.onAwake()
-
     # Start
+    Current_scene.onAwake()
     while Current_scene.running:
-        for event in pygame.event.get():
+        RsContainers.Events = pygame.event.get()
+        for event in RsContainers.Events:
             if event.type == pygame.QUIT:
                 sys.exit()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
@@ -40,17 +39,17 @@ if __name__ == "__main__":
 
         frame_time = absolute_timer.get_time()
         screen.fill(black)
-        Current_scene.onUpdate(frame_time)
-        Current_scene.onUpdateLater(frame_time)
-        Current_scene.onDraw(frame_time)
-        Current_scene.onGUI(frame_time)
+        asyncio.run(Current_scene.onUpdate(frame_time))
+        asyncio.run(Current_scene.onUpdateLater(frame_time))
+        asyncio.run(Current_scene.onDraw(frame_time))
+        asyncio.run(Current_scene.onGUI(frame_time))
 
         pygame.display.flip()
         absolute_timer.tick()
 
     Current_scene.onDestroy()
-    if 0 < len(Scenes):
-        Current_scene = Scenes.pop()
+    if 0 < len(Stage):
+        Current_scene = Stage.pop()
         Current_scene.onAwake()
 
     print("Program is ended.")

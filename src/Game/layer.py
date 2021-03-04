@@ -1,15 +1,19 @@
+from .prefab import RsPrefab
+
+
 class RsLayer(object):
-    name: str = "Default"
-    storage: list[object] = []
+    def __init__(self, name: str = "Default"):
+        self.name: str = name
+        self.storage: list[RsPrefab] = []
 
     def __repr__(self) -> str:
         return "Layer " + self.name
 
-    async def onAwake(self) -> None:
+    def onAwake(self) -> None:
         for Instance in self.storage:
             Instance.onAwake()
 
-    async def onDestroy(self):
+    def onDestroy(self):
         for Instance in self.storage:
             Instance.onDestroy()
 
