@@ -9,25 +9,17 @@ class Scene(object):
         self.trees[caption] = Temp
 
     def __init__(self, name: str):
-        self.index: int = 0
         self.name = name
         self.paused = False
         self.stack: list[RsLayer] = []
         self.trees: dict[str, RsLayer] = {}
         self.EveryInstancesPot: list = []
         self.SpecificInstancesPot: dict[str, list] = {}
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self.index < len(RsContainers.RoomOrder) - 1:
-            return RsContainers.RoomOrder[self.index + 1]
-        else:
-            raise StopIteration
+        self.before = None
+        self.next = None
 
     def __repr__(self) -> str:
-        return "Room " + self.name + " at (" + str(self.index) + ")"
+        return "Room " + self.name
 
     def pause(self):
         self.paused = True

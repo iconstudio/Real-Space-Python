@@ -14,9 +14,7 @@ class RsCoordinates:
 
 
 class RsPhysics:
-    def __init__(self, x: float = 0, y: float = 0):
-        self.coordinates = RsCoordinates(x, y)
-
+    def __init__(self):
         self.__speed: float = 0
         self.__direction: float = 0
         self.__hspeed: float = 0
@@ -27,12 +25,15 @@ class RsPhysics:
             "direction": 0
         }
 
+
 class RsObject(object):
-    def __init__(self, layer: RsLayer = None):
+    def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
         self.__link_original = None
         self.__enabled = True
         self.__visible = True
         self.layer = layer
+
+        self.coordinates = RsCoordinates(x, y)
 
     @property
     def link_original(self) -> Optional[RsPrefab]:
@@ -46,6 +47,22 @@ class RsObject(object):
     def visible(self) -> bool:
         return self.__visible
 
+    @property
+    def x(self):
+        return self.coordinates.__x
+
+    @property
+    def y(self):
+        return self.coordinates.__y
+
+    @property
+    def xprevious(self):
+        return self.coordinates.__xp
+
+    @property
+    def yprevious(self):
+        return self.coordinates.__yp
+
     @link_original.setter
     def link_original(self, target):
         self.__link_original = target
@@ -58,32 +75,26 @@ class RsObject(object):
     def visible(self, flag):
         self.__visible = flag
 
+    @x.setter
+    def x(self, value: float):
+        self.coordinates.__xp = self.coordinates.__x
+        self.coordinates.__x = value
+
+    @y.setter
+    def y(self, value: float):
+        self.coordinates.__yp = self.coordinates.__y
+        self.coordinates.__y = value
+
 
 class RsDirtyObject(RsObject):
     def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
-        super().__init__(layer)
+        super().__init__(layer, x, y)
 
-        self.movement = RsPhysics(x, y)
+        self.movement = RsPhysics()
 
         self.sprite_index: object = None  # Not an original sprite
         self.image_angle: float = 0
         self.image_index: float = 0
-
-    @property
-    def x(self):
-        return self.movement.coordinates.__x
-
-    @property
-    def y(self):
-        return self.movement.coordinates.__y
-
-    @property
-    def xprevious(self):
-        return self.movement.coordinates.__xp
-
-    @property
-    def yprevious(self):
-        return self.movement.coordinates.__yp
 
     @property
     def speed(self):
@@ -100,16 +111,6 @@ class RsDirtyObject(RsObject):
     @property
     def vspeed(self):
         return self.movement.__vspeed
-
-    @x.setter
-    def x(self, value: float):
-        self.movement.coordinates.__xp = self.movement.coordinates.__x
-        self.movement.coordinates.__x = value
-
-    @y.setter
-    def y(self, value: float):
-        self.movement.coordinates.__yp = self.movement.coordinates.__y
-        self.movement.coordinates.__y = value
 
     @speed.setter
     def speed(self, value):

@@ -3,4 +3,3 @@ if __name__ == "__main__":
 
     framework.init()
     framework.startup()
-    framework.endup()
