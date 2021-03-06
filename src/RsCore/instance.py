@@ -2,10 +2,11 @@ from RsCore.utilities import *
 
 
 class RsObject(object):
-    def __init__(self, layer=None, x=0, y=0):
+    def __init__(self, scene, layer, x=0, y=0):
         self.__link_original = None
         self.__enabled = True
         self.__visible = True
+        self.scene = scene
         self.layer = layer
         self.x = x
         self.y = y
@@ -60,8 +61,8 @@ class RsObject(object):
 
 
 class RsDirtyObject(RsObject):
-    def __init__(self, layer=None, x=0, y=0):
-        super().__init__(layer, x, y)
+    def __init__(self, scene, layer, x=0, y=0):
+        super().__init__(scene, layer, x, y)
 
         self.image_angle = 0
         self.image_index = 0

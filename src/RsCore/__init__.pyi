@@ -11,7 +11,7 @@ from .layer import RsLayer
 from .prefab import RsPrefab
 from .instance import RsObject
 from .sprite import RsSprite
-import constants as RsConstants, containers as RsContainers
+import RsCore.constants as RsConstants, RsCore.containers as RsContainers
 from .assets import *
 
 RsScreen: Optional[PySurface]

@@ -1,18 +1,8 @@
 Resolutions = (640, 480)
 
-layer_default = [
-    "Background", "Doodad Below", "Terrain Below", "Trap", "Terrain", "Effect Below",
-    "Entity", "Player", "Bullet", "Effect", "Doodad Above", "Effect Above", "UI", "System"
-]
-
 # 10 px == 1 metre
 phy_mess: float = 10.0 / 1
 phy_velocity: float = (((1000.0 / 60.0) / 60.0) * phy_mess)
-
-
-class TEAMS:
-    RED = 0
-    BLUE = 1
 
 
 class MASKS:

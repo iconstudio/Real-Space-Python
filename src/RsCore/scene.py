@@ -1,7 +1,7 @@
 class RsScene(object):
     def __init__(self, name):
         self.name = name
-        self.stack = []
+        self.layer_stack = []
         self.trees = {}
         self.paused = False
         self.EveryInstancesPot = []
@@ -22,25 +22,25 @@ class RsScene(object):
         self.paused = False
 
     def onAwake(self):
-        for Layer in self.stack:
+        for Layer in self.layer_stack:
             Layer.onAwake()
 
     def onDestroy(self):
-        for Layer in self.stack:
+        for Layer in self.layer_stack:
             Layer.onDestroy()
 
     def onUpdate(self, time):
-        for Layer in self.stack:
+        for Layer in self.layer_stack:
             Layer.onUpdate(time)
 
     def onUpdateLater(self, time):
-        for Layer in self.stack:
+        for Layer in self.layer_stack:
             Layer.onUpdateLater(time)
 
     def onDraw(self, time):
-        for Layer in self.stack:
+        for Layer in self.layer_stack:
             Layer.onDraw(time)
 
     def onGUI(self, time):
-        for Layer in self.stack:
+        for Layer in self.layer_stack:
             Layer.onGUI(time)

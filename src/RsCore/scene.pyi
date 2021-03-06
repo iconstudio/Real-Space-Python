@@ -3,7 +3,7 @@ from RsCore.layer import RsLayer
 
 class RsScene(object):
     name: str
-    stack: list[RsLayer]
+    layer_stack: list[RsLayer]
     trees: dict[str, RsLayer]
     paused: bool
     EveryInstancesPot: list
@@ -19,7 +19,7 @@ class RsScene(object):
 
     def add_layer(self, caption: str):
         Temp = RsLayer(caption)
-        self.stack.append(Temp)
+        self.layer_stack.append(Temp)
         self.trees[caption] = Temp
 
     def pause(self):

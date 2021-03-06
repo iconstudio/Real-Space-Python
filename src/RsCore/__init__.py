@@ -46,22 +46,6 @@ def init():
     PyDisplay.set_allow_screensaver(False)
     RsScreen = PyDisplay.set_mode(RsConstants.Resolutions)
 
-    # Test
-    TestLayer1 = RsLayer("Test 1")
-    TestLayer2 = RsLayer("Test 2")
-    TestInstance = RsDirtyObject(TestLayer1)
-    TestInstance.x = 40
-    TestInstance.y = 70
-    TestInstance.speed = 40
-    print(TestLayer1)
-    print(TestLayer2)
-    TestInstance.layer = TestLayer2
-    print("x = " + str(TestInstance.x))
-    print(TestInstance)
-    TestInstance.x = 70
-    TestInstance.x += 20
-    print("x = " + str(TestInstance.x))
-
     # Startup
     Game.init()
     Rooms = RsContainers.RoomOrder

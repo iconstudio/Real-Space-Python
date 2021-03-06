@@ -1,5 +1,6 @@
 from typing import Optional
 
+from RsCore.scene import RsScene
 from RsCore.layer import RsLayer
 from RsCore.prefab import RsPrefab
 from RsCore.sprite import RsSprite
@@ -9,11 +10,12 @@ class RsObject(object):
     __link_original: Optional[RsPrefab] = None
     __enabled: bool = True
     __visible: bool = True
-    layer: Optional[RsLayer] = None
+    scene: RsScene
+    layer: RsLayer
     x: float = 0
     y: float = 0
 
-    def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
+    def __init__(self, scene: RsScene, layer: RsLayer, x: float = 0, y: float = 0):
         ...
 
     @property
@@ -71,7 +73,7 @@ class RsDirtyObject(RsObject):
     __vspeed: float
     gravity: dict[str, float]
 
-    def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
+    def __init__(self, scene: RsScene, layer: RsLayer, x: float = 0, y: float = 0):
         ...
 
     ...
