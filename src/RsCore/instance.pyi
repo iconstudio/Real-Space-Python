@@ -5,16 +5,6 @@ from RsCore.prefab import RsPrefab
 from RsCore.sprite import RsSprite
 
 
-class RsCoordinates(object):
-    __x: float = 0
-    __y: float = 0
-    __xp: float = 0
-    __yp: float = 0
-
-    def __init__(self, x: float, y: float):
-        ...
-
-
 class RsPhysics(object):
     __speed: float = 0
     __direction: float = 0
@@ -29,7 +19,8 @@ class RsObject(object):
     __enabled: bool = True
     __visible: bool = True
     layer: Optional[RsLayer] = None
-    coordinates: RsCoordinates
+    x: float = 0
+    y: float = 0
 
     def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
         ...
@@ -46,22 +37,6 @@ class RsObject(object):
     def visible(self) -> bool:
         ...
 
-    @property
-    def x(self) -> float:
-        ...
-
-    @property
-    def y(self) -> float:
-        ...
-
-    @property
-    def xprevious(self) -> float:
-        ...
-
-    @property
-    def yprevious(self) -> float:
-        ...
-
     @link_original.setter
     def link_original(self, target):
         ...
@@ -72,14 +47,6 @@ class RsObject(object):
 
     @visible.setter
     def visible(self, flag: bool):
-        ...
-
-    @x.setter
-    def x(self, value: float):
-        ...
-
-    @y.setter
-    def y(self, value: float):
         ...
 
     def onAwake(self):

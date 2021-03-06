@@ -1,12 +1,10 @@
 import asyncio
 import sys
-from typing import Optional
 
 import pygame
 import pygame.constants as PyConstants
 import pygame.display as PyDisplay
 import pygame.event as PyEvent
-from pygame.surface import Surface as PySurface
 from pygame.time import Clock as Clock
 
 from RsCore.scene import RsScene
@@ -17,11 +15,11 @@ from RsCore.sprite import RsSprite
 from RsCore import constants as RsConstants, containers as RsContainers
 from RsCore.assets import *
 
-RsScreen: Optional[PySurface] = None
-RsRoom: Optional[RsScene] = None
+RsScreen = None
+RsRoom = None
 
 
-async def event_collect() -> int:
+async def event_collect():
     # TODO: #1 summary events in a list for each types.
     RsContainers.Events = PyEvent.get()
     for event in RsContainers.Events:
@@ -41,6 +39,7 @@ def init():
     global RsScreen, RsRoom
 
     pygame.init()
+    PyDisplay.init()
     PyDisplay.set_caption("Real Space")
     PyDisplay.set_allow_screensaver(False)
     RsScreen = PyDisplay.set_mode(RsConstants.Resolutions)
@@ -55,10 +54,19 @@ def init():
     room_register("roomStage03")
 
     # Test
-    TestLayer = RsLayer("Test")
-    TestInstance = RsObject(TestLayer)
-    print(TestLayer)
+    TestLayer1 = RsLayer("Test 1")
+    TestLayer2 = RsLayer("Test 2")
+    TestInstance = RsObject(TestLayer1)
+    TestInstance.x = 40
+    TestInstance.y = 70
+    print(TestLayer1)
+    print(TestLayer2)
+    TestInstance.layer = TestLayer2
+    print("x = " + str(TestInstance.x))
     print(TestInstance)
+    TestInstance.x = 70
+    TestInstance.x += 20
+    print("x = " + str(TestInstance.x))
 
     # Startup
     Rooms = RsContainers.RoomOrder
