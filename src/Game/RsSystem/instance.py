@@ -101,19 +101,24 @@ class RsObject(object):
             self.__link_original.onAwake(self)
 
     def onDestroy(self):
-        pass
+        if self.__link_original:
+            self.__link_original.onDestroy(self)
 
     def onUpdate(self, time: int):
-        pass
+        if self.__link_original:
+            self.__link_original.onUpdate(time, self)
 
     def onUpdateLater(self, time: int):
-        pass
+        if self.__link_original:
+            self.__link_original.onUpdateLater(time, self)
 
     def onDraw(self, time: int):
-        pass
+        if self.__link_original:
+            self.__link_original.onDraw(time, self)
 
     def onGUI(self, time: int):
-        pass
+        if self.__link_original:
+            self.__link_original.onGUI(time, self)
 
 
 class RsDirtyObject(RsObject):

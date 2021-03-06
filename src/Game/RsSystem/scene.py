@@ -3,14 +3,6 @@ from Game.RsSystem import containers as RsContainers
 
 
 class Scene(object):
-    paused: bool = False
-    stack: list[RsLayer]
-    trees: dict[str, RsLayer]
-    EveryInstancesPot: list
-    SpecificInstancesPot: dict[str, list]
-    before = None
-    next = None
-
     def add_layer(self, caption: str):
         Temp = RsLayer(caption)
         self.stack.append(Temp)
@@ -18,6 +10,13 @@ class Scene(object):
 
     def __init__(self, name: str):
         self.name = name
+        self.stack: list[RsLayer] = []
+        self.trees: dict[str, RsLayer] = {}
+        self.paused: bool = False
+        self.EveryInstancesPot: list = []
+        self.SpecificInstancesPot: dict[str, list] = {}
+        self.before = None
+        self.next = None
 
     def __repr__(self) -> str:
         return "Room " + self.name

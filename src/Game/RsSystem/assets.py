@@ -35,7 +35,7 @@ def room_register(name: str):
     Number = len(RsContainers.RoomOrder)
     if 0 < Number:
         LastRoom = RsContainers.RoomOrder[-1]
-        if LastRoom:
+        if LastRoom and Temp:
             Temp.before = LastRoom
             LastRoom.next = Temp
     else:
@@ -82,6 +82,7 @@ def room_goto_next():
 
 def instance_create(prefab: type[RsObject], layer: RsLayer, x: float = 0, y: float = 0) -> RsObject:
     Instance = prefab(layer, x, y)
+    Instance.onAwake()
 
     return Instance
 

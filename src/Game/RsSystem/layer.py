@@ -1,11 +1,7 @@
-from Game.RsSystem.instance import RsObject
-
-
 class RsLayer(object):
-    storage: list[RsObject]
-
     def __init__(self, name: str):
         self.name: str = name
+        self.storage = []
 
     def __repr__(self) -> str:
         return "Layer " + self.name
