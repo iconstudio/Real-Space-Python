@@ -10,7 +10,7 @@ from pygame.time import Clock as Clock
 from RsCore.scene import RsScene
 from RsCore.layer import RsLayer
 from RsCore.prefab import RsPrefab
-from RsCore.instance import RsObject
+from RsCore.instance import RsObject, RsDirtyObject
 from RsCore.sprite import RsSprite
 from RsCore import constants as RsConstants, containers as RsContainers
 from RsCore.assets import *
@@ -49,9 +49,10 @@ def init():
     # Test
     TestLayer1 = RsLayer("Test 1")
     TestLayer2 = RsLayer("Test 2")
-    TestInstance = RsObject(TestLayer1)
+    TestInstance = RsDirtyObject(TestLayer1)
     TestInstance.x = 40
     TestInstance.y = 70
+    TestInstance.speed = 40
     print(TestLayer1)
     print(TestLayer2)
     TestInstance.layer = TestLayer2

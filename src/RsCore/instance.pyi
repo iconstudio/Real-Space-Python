@@ -5,19 +5,6 @@ from RsCore.prefab import RsPrefab
 from RsCore.sprite import RsSprite
 
 
-class RsPhysics(object):
-    def __init__(self):
-        self.__hspeed = float(0)
-        self.__vspeed = float(0)
-
-    __speed: float = 0
-    __direction: float = 0
-    __hspeed: float = 0
-    __vspeed: float = 0
-    gravity: dict[str, float]
-    ...
-
-
 class RsObject(object):
     __link_original: Optional[RsPrefab] = None
     __enabled: bool = True
@@ -75,10 +62,14 @@ class RsObject(object):
 
 
 class RsDirtyObject(RsObject):
-    movement: RsPhysics
     sprite_index: Optional[RsSprite] = None
-    image_angle: float = 0
-    image_index: float = 0
+    image_angle: float
+    image_index: float
+    __speed: float
+    __direction: float
+    __hspeed: float
+    __vspeed: float
+    gravity: dict[str, float]
 
     def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
         ...

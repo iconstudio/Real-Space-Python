@@ -1,14 +1,6 @@
 from RsCore.utilities import *
 
 
-class RsPhysics(object):
-    def __init__(self):
-        self.gravity = {
-            "force": 0,
-            "direction": 0
-        }
-
-
 class RsObject(object):
     def __init__(self, layer=None, x=0, y=0):
         self.__link_original = None
@@ -71,55 +63,64 @@ class RsDirtyObject(RsObject):
     def __init__(self, layer=None, x=0, y=0):
         super().__init__(layer, x, y)
 
-        self.movement = RsPhysics()
+        self.image_angle = 0
+        self.image_index = 0
+        self.__speed = 0
+        self.__direction = 0
+        self.__hspeed = 0
+        self.__vspeed = 0
+        self.gravity = {
+            "force": 0,
+            "direction": 0
+        }
 
     @property
     def speed(self) -> float:
-        return self.movement.__speed
+        return self.__speed
 
     @property
     def direction(self) -> float:
-        return self.movement.__direction
+        return self.__direction
 
     @property
     def hspeed(self) -> float:
-        return self.movement.__hspeed
+        return self.__hspeed
 
     @property
     def vspeed(self) -> float:
-        return self.movement.__vspeed
+        return self.__vspeed
 
     @speed.setter
     def speed(self, value):
-        self.movement.__speed = value
-        self.movement.__hspeed = lengthdir_x(value, self.movement.__direction)
-        self.movement.__vspeed = lengthdir_y(value, self.movement.__direction)
+        self.__speed = value
+        self.__hspeed = lengthdir_x(value, self.__direction)
+        self.__vspeed = lengthdir_y(value, self.__direction)
 
     @direction.setter
     def direction(self, value):
-        self.movement.__direction = value
-        self.movement.__hspeed = lengthdir_x(self.movement.__speed, self.movement.__direction)
-        self.movement.__vspeed = lengthdir_y(self.movement.__speed, self.movement.__direction)
+        self.__direction = value
+        self.__hspeed = lengthdir_x(self.__speed, self.__direction)
+        self.__vspeed = lengthdir_y(self.__speed, self.__direction)
 
     @hspeed.setter
     def hspeed(self, value):
-        self.movement.__hspeed = value
-        self.movement.__speed = point_distance(0, 0, self.movement.__hspeed, self.movement.__vspeed)
-        self.movement.__direction = point_direction(0, 0, self.movement.__hspeed, self.movement.__vspeed)
+        self.__hspeed = value
+        self.__speed = point_distance(0, 0, self.__hspeed, self.__vspeed)
+        self.__direction = point_direction(0, 0, self.__hspeed, self.__vspeed)
 
     @vspeed.setter
     def vspeed(self, value):
-        self.movement.__vspeed = value
-        self.movement.__speed = point_distance(0, 0, self.movement.__hspeed, self.movement.__vspeed)
-        self.movement.__direction = point_direction(0, 0, self.movement.__hspeed, self.movement.__vspeed)
+        self.__vspeed = value
+        self.__speed = point_distance(0, 0, self.__hspeed, self.__vspeed)
+        self.__direction = point_direction(0, 0, self.__hspeed, self.__vspeed)
 
     def onUpdateLater(self, time):
         super().onUpdateLater(time)
 
-        Hspeed = self.movement.__hspeed
+        Hspeed = self.__hspeed
         if Hspeed != 0:
             self.x += Hspeed
 
-        Vspeed = self.movement.__vspeed
+        Vspeed = self.__vspeed
         if Vspeed != 0:
             self.y += Vspeed
