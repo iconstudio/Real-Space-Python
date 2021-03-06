@@ -1,8 +1,8 @@
-from Game.RsSystem.scene import Scene
+from RsCore import containers as RsContainers
+from RsCore import RsScene
 from Game.intro import SceneIntro
-from Game.RsSystem import constants as RsConstants, containers as RsContainers
 
 
-class GameGlobal(Scene):
+class GameGlobal(RsScene):
     def onAwake(self):
         RsContainers.RoomOrder.append(SceneIntro())

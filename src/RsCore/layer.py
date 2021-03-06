@@ -1,9 +1,9 @@
 class RsLayer(object):
     def __init__(self, name: str):
-        self.name: str = name
+        self.name = name
         self.storage = []
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         return "Layer " + self.name
 
     def onAwake(self):
@@ -14,18 +14,18 @@ class RsLayer(object):
         for Instance in self.storage:
             Instance.onDestroy()
 
-    def onUpdate(self, time: int):
+    def onUpdate(self, time):
         for Instance in self.storage:
             Instance.onUpdate(time)
 
-    def onUpdateLater(self, time: int):
+    def onUpdateLater(self, time):
         for Instance in self.storage:
             Instance.onUpdateLater(time)
 
-    def onDraw(self, time: int):
+    def onDraw(self, time):
         for Instance in self.storage:
             Instance.onDraw(time)
 
-    def onGUI(self, time: int):
+    def onGUI(self, time):
         for Instance in self.storage:
             Instance.onGUI(time)

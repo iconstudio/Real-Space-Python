@@ -1,7 +1,7 @@
 Resolutions = (640, 480)
 
 layer_default = [
-    "Background", "Doodad Below","Terrain Below", "Trap", "Terrain", "Effect Below",
+    "Background", "Doodad Below", "Terrain Below", "Trap", "Terrain", "Effect Below",
     "Entity", "Player", "Bullet", "Effect", "Doodad Above", "Effect Above", "UI", "System"
 ]
 
@@ -22,6 +22,7 @@ class MASKS:
 
 # Colors
 from pygame import Color
+
 # from collections import namedtuple
 # Color = namedtuple("Color", ["r", "g", "b"])
 

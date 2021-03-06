@@ -1,4 +1,4 @@
-from Game.RsSystem.prefab import RsObject
+from RsCore import RsObject
 
 
 class SPACESHIP_TYPES:

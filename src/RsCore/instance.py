@@ -1,55 +1,40 @@
-from typing import Optional
-import pygame.sprite as PySprite
-from pygame.sprite import Sprite as RsRawSprite
-from pygame.sprite import Group as RsRawGroup
-
-from Game.RsSystem.layer import RsLayer
-from Game.RsSystem.prefab import RsPrefab
-from Game.RsSystem.sprite import RsSprite
-from Game.RsSystem.utilities import *
+from RsCore.utilities import *
 
 
 class RsCoordinates:
-    def __init__(self, x: float = 0, y: float = 0):
-        self.__xp: float = x
-        self.__yp: float = y
-        self.__x: float = x
-        self.__y: float = y
+    def __init__(self, x, y):
+        self.__xp = x
+        self.__yp = y
+        self.__x = x
+        self.__y = y
 
 
 class RsPhysics:
     def __init__(self):
-        self.__speed: float = 0
-        self.__direction: float = 0
-        self.__hspeed: float = 0
-        self.__vspeed: float = 0
-
-        self.gravity: dict[str, float] = {
+        self.gravity = {
             "force": 0,
             "direction": 0
         }
 
 
 class RsObject(object):
-    def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
-        super().__init__()
-        self.__link_original: Optional[RsPrefab] = None
-        self.__enabled: bool = True
-        self.__visible: bool = True
-        self.layer: Optional[RsLayer] = layer
-
+    def __init__(self, layer=None, x=0, y=0):
+        self.__link_original = None
+        self.__enabled = True
+        self.__visible = True
+        self.layer = layer
         self.coordinates = RsCoordinates(x, y)
 
     @property
-    def link_original(self) -> Optional[RsPrefab]:
+    def link_original(self):
         return self.__link_original
 
     @property
-    def enabled(self) -> bool:
+    def enabled(self):
         return self.__enabled
 
     @property
-    def visible(self) -> bool:
+    def visible(self):
         return self.__visible
 
     @property
@@ -81,20 +66,14 @@ class RsObject(object):
         self.__visible = flag
 
     @x.setter
-    def x(self, value: float):
+    def x(self, value):
         self.coordinates.__xp = self.coordinates.__x
         self.coordinates.__x = value
 
     @y.setter
-    def y(self, value: float):
+    def y(self, value):
         self.coordinates.__yp = self.coordinates.__y
         self.coordinates.__y = value
-
-    def pause(self):
-        self.paused = True
-
-    def resume(self):
-        self.paused = False
 
     def onAwake(self):
         if self.__link_original:
@@ -122,29 +101,25 @@ class RsObject(object):
 
 
 class RsDirtyObject(RsObject):
-    def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
+    def __init__(self, layer=None, x=0, y=0):
         super().__init__(layer, x, y)
 
         self.movement = RsPhysics()
 
-        self.sprite_index: Optional[RsSprite] = None
-        self.image_angle: float = 0
-        self.image_index: float = 0
-
     @property
-    def speed(self):
+    def speed(self) -> float:
         return self.movement.__speed
 
     @property
-    def direction(self):
+    def direction(self) -> float:
         return self.movement.__direction
 
     @property
-    def hspeed(self):
+    def hspeed(self) -> float:
         return self.movement.__hspeed
 
     @property
-    def vspeed(self):
+    def vspeed(self) -> float:
         return self.movement.__vspeed
 
     @speed.setter

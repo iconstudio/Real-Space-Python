@@ -1,5 +1,4 @@
-if __name__ == "__main__":
-    import framework
+import RsCore
 
-    framework.init()
-    framework.startup()
+if __name__ == "__main__":
+    RsCore.init()

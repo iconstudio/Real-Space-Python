@@ -1,5 +1,5 @@
-from Game.RsSystem.scene import Scene
-from Game.RsSystem import constants as RsConstants, containers as RsContainers
+from RsCore import RsScene
 
-class GaSceneIntromeGlobal(Scene):
+
+class GaSceneIntromeGlobal(RsScene):
     ...

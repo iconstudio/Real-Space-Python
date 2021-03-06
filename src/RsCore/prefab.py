@@ -1,22 +1,14 @@
-from typing import Optional
-
-from Game.RsSystem.sprite import RsSprite
-
-
-class RsObject(object): ...
-
-
 class RsPrefab(object):
+    def __init__(self, name: str):
+        self.name = name
+        self.__parent = None
+        self.children = []
+        self.__link_implement = None
+        self.sprite_index = None
+        self.serial: int = 0
+
     def __hash__(self) -> int:
         return self.name.__hash__()
-
-    def __init__(self, name: str):
-        self.name: str = name
-        self.__parent: Optional[RsPrefab] = None
-        self.children: list[RsPrefab] = []
-        self.__link_implement = None
-        self.sprite_index: Optional[RsSprite] = None
-        self.serial: int = 0
 
     @property
     def parent(self):
@@ -34,7 +26,7 @@ class RsPrefab(object):
             target.children.append(self)
 
     @property
-    def link_implement(self) -> Optional[RsObject]:
+    def link_implement(self):
         return self.__link_implement
 
     @link_implement.setter
@@ -52,14 +44,14 @@ class RsPrefab(object):
     def onDestroy(self, target):
         pass
 
-    def onUpdate(self, time: int, target):
+    def onUpdate(self, time, target):
         pass
 
-    def onUpdateLater(self, time: int, target):
+    def onUpdateLater(self, time, target):
         pass
 
-    def onDraw(self, time: int, target):
+    def onDraw(self, time, target):
         pass
 
-    def onGUI(self, time: int, target):
+    def onGUI(self, time, target):
         pass

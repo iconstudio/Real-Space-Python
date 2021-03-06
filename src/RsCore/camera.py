@@ -1,5 +1,5 @@
-from Game.RsSystem.layer import RsLayer
-from Game.RsSystem.instance import RsObject
+from RsCore.instance import RsObject
+from RsCore.layer import RsLayer
 
 
 class oCamera(RsObject):
