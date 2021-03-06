@@ -1,8 +1,12 @@
 from typing import Optional
+import pygame.sprite as PySprite
+from pygame.sprite import Sprite as RsRawSprite
+from pygame.sprite import Group as RsRawGroup
 
 from Game.RsSystem.layer import RsLayer
 from Game.RsSystem.prefab import RsPrefab
-from .utilities import *
+from Game.RsSystem.sprite import RsSprite
+from Game.RsSystem.utilities import *
 
 
 class RsCoordinates:
@@ -28,10 +32,11 @@ class RsPhysics:
 
 class RsObject(object):
     def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
-        self.__link_original = None
-        self.__enabled = True
-        self.__visible = True
-        self.layer = layer
+        super().__init__()
+        self.__link_original: Optional[RsPrefab] = None
+        self.__enabled: bool = True
+        self.__visible: bool = True
+        self.layer: Optional[RsLayer] = layer
 
         self.coordinates = RsCoordinates(x, y)
 
@@ -85,6 +90,31 @@ class RsObject(object):
         self.coordinates.__yp = self.coordinates.__y
         self.coordinates.__y = value
 
+    def pause(self):
+        self.paused = True
+
+    def resume(self):
+        self.paused = False
+
+    def onAwake(self):
+        if self.__link_original:
+            self.__link_original.onAwake(self)
+
+    def onDestroy(self):
+        pass
+
+    def onUpdate(self, time: int):
+        pass
+
+    def onUpdateLater(self, time: int):
+        pass
+
+    def onDraw(self, time: int):
+        pass
+
+    def onGUI(self, time: int):
+        pass
+
 
 class RsDirtyObject(RsObject):
     def __init__(self, layer: RsLayer = None, x: float = 0, y: float = 0):
@@ -92,7 +122,7 @@ class RsDirtyObject(RsObject):
 
         self.movement = RsPhysics()
 
-        self.sprite_index: object = None  # Not an original sprite
+        self.sprite_index: Optional[RsSprite] = None
         self.image_angle: float = 0
         self.image_index: float = 0
 

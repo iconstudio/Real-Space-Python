@@ -22,21 +22,21 @@ def init():
     PyDisplay.set_allow_screensaver(False)
     RsScreen = PyDisplay.set_mode(RsConstants.Resolutions)
 
-    room_add("roomInit")
-    room_add("roomLogo")
-    room_add("roomIntro")
-    room_add("roomMain")
-    room_add("roomDemo")
-    room_add("roomStage01")
-    room_add("roomStage02")
-    room_add("roomStage03")
+    room_register("roomInit")
+    room_register("roomLogo")
+    room_register("roomIntro")
+    room_register("roomMain")
+    room_register("roomDemo")
+    room_register("roomStage01")
+    room_register("roomStage02")
+    room_register("roomStage03")
 
 def endup():
     print("Program is ended.")
     pygame.quit()
 
 async def event_collect() -> int:
-    #TODO: summary events in a list for each types.
+    #TODO: #1 summary events in a list for each types.
     RsContainers.Events = PyEvent.get()
     for event in RsContainers.Events:
         if event.type == PyConstants.QUIT:

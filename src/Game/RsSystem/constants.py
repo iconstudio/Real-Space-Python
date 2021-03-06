@@ -15,9 +15,15 @@ class TEAMS:
     BLUE = 1
 
 
+class MASKS:
+    RECTANGLE = 0
+    CIRCLE = 2
+
+
 # Colors
-from collections import namedtuple
-Color = namedtuple("Color", ["r", "g", "b"])
+from pygame import Color
+# from collections import namedtuple
+# Color = namedtuple("Color", ["r", "g", "b"])
 
 # Greyscales
 c_white = Color(255, 255, 255)

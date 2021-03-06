@@ -7,9 +7,17 @@ from Game.RsSystem.prefab import RsPrefab
 from Game.RsSystem.scene import Scene
 
 __all__ = [
-    "scene_update", "room_add", "room_get", "room_goto", "room_goto_next", "instance_create"
+    "object_register", 
+    "scene_update", "room_register", "room_get", "room_goto", "room_goto_next",
+    "instance_create"
 ]
 
+
+def object_register(name: str) -> RsPrefab:
+    Temp = RsPrefab(name)
+    RsContainers.PrefabsPot[name] = Temp
+
+    return Temp
 
 async def scene_update(room: Scene, time: int) -> None:
     room.onUpdate(time)
@@ -17,9 +25,9 @@ async def scene_update(room: Scene, time: int) -> None:
     room.onDraw(time)
     room.onGUI(time)
 
-def room_add(name: str):
+def room_register(name: str):
     global RsRoom, RsLastRoom
-    Temp: Scene = Scene(name)
+    Temp = Scene(name)
 
     for explicit_layer in RsConstants.layer_default:
         Temp.add_layer(explicit_layer)
@@ -40,7 +48,7 @@ def room_add(name: str):
 def room_get(id: Union[int, str]) -> Optional[Scene]:
     if type(id) is int:
         return RsContainers.RoomOrder[id]
-    else:
+    elif type(id) is str:
         return RsContainers.RoomPot[id]
 
 def room_set(taget: Scene):
@@ -76,3 +84,7 @@ def instance_create(prefab: type[RsObject], layer: RsLayer, x: float = 0, y: flo
     Instance = prefab(layer, x, y)
 
     return Instance
+
+def instance_destroy(instance: RsObject):
+    instance.onDestroy()
+    del instance

@@ -1,19 +1,68 @@
 import json
-from typing import Union
+import os
+from typing import Optional, Union, overload
 
-import pygame.sprite as PySprite
+from pygame.rect import Rect as PyRect
+import pygame.surface as PySurface
+import pygame.image as PyImage
+
+from Game.RsSystem import constants as RsConstants
+
+
+class RsImage(object):
+    number: int = -1
+    raw_data: list[PySurface.Surface]
+    boundbox = PyRect(0, 0, 0, 0)
+
+    def __init__(self, filepath: Union[list[str], str]) -> None:
+        if type(filepath) is str:
+            self.number = 0
+            self.raw_data.append(PyImage.load(filepath))
+            self.filename = os.path.splitext(filepath)[0]
+            
+        else:
+            self.number = len(filepath)
+            
+            for file in filepath:
+                self.raw_data.append(PyImage.load(file))
+            self.filename = os.path.splitext(filepath[0])[0]
+
+        self.boundbox.width = self.raw_data[0].get_width()
+        self.boundbox.height = self.raw_data[0].get_height()
+
+    def draw(self, x: float, y: float, index: int):
+        if self.number == 0:
+            Temp = self.raw_data[0]
+            Temp.get_rect()
+        else:
+            pass
 
 
 class RsSprite(object):
-    raw_data = PySprite.Sprite()
-    pass
+    xoffset: int = 0
+    yoffset: int = 0
+    raw_data: Optional[RsImage] = None
+
+    def __init__(self, image: RsImage, mask_type = RsConstants.MASKS.RECTANGLE, xo: int = 0, yo: int = 0):
+        self.raw_data = image
+        self.xoffset = xo
+        self.yoffset = yo
+
+    def update(self, x: float, y: float):
+        if self.raw_data:
+            Box = self.raw_data.boundbox
+            Box.x = int(x)
+            Box.y = int(y)
+
+    def draw(self, x: float, y: float, index: int = 0):
+        self.raw_data.draw(x, y, index)
 
 
 sprite_list: dict = {}
 
 
-def load_image(filename: str, xo: float, yo: float) -> RawImage:
-    return RawImage()
+def load_image(filename: str, xo: float, yo: float):
+    ...
 
 
 class LegacySprite(object):

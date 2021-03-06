@@ -1,12 +1,16 @@
+from Game.RsSystem.instance import RsObject
+
+
 class RsLayer(object):
+    storage: list[RsObject]
+
     def __init__(self, name: str):
         self.name: str = name
-        self.storage: list = []
 
     def __repr__(self) -> str:
         return "Layer " + self.name
 
-    def onAwake(self) -> None:
+    def onAwake(self):
         for Instance in self.storage:
             Instance.onAwake()
 

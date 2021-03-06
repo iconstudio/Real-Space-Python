@@ -1,15 +1,15 @@
 # Rooms
-RoomOrder: list = []
-RoomPot: dict = {}
+RoomOrder = []
+RoomPot = {}
 
 # Events
-Events: list = []
+Events = []
 
 # Sprite texture group
-Atlas: list[object] = []
+Atlas = []
 
 # All game objects
-PrefabsPot: dict = {}
+PrefabsPot = {}
 
 # All sounds
-AudioPot: list[object] = []
+AudioPot = {}
