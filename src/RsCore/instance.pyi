@@ -6,6 +6,10 @@ from RsCore.sprite import RsSprite
 
 
 class RsPhysics(object):
+    def __init__(self):
+        self.__hspeed = float(0)
+        self.__vspeed = float(0)
+
     __speed: float = 0
     __direction: float = 0
     __hspeed: float = 0

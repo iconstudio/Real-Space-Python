@@ -112,3 +112,14 @@ class RsDirtyObject(RsObject):
         self.movement.__vspeed = value
         self.movement.__speed = point_distance(0, 0, self.movement.__hspeed, self.movement.__vspeed)
         self.movement.__direction = point_direction(0, 0, self.movement.__hspeed, self.movement.__vspeed)
+
+    def onUpdateLater(self, time):
+        super().onUpdateLater(time)
+
+        Hspeed = self.movement.__hspeed
+        if Hspeed != 0:
+            self.x += Hspeed
+
+        Vspeed = self.movement.__vspeed
+        if Vspeed != 0:
+            self.y += Vspeed

@@ -15,6 +15,8 @@ from RsCore.sprite import RsSprite
 from RsCore import constants as RsConstants, containers as RsContainers
 from RsCore.assets import *
 
+import Game
+
 RsScreen = None
 RsRoom = None
 
@@ -44,15 +46,6 @@ def init():
     PyDisplay.set_allow_screensaver(False)
     RsScreen = PyDisplay.set_mode(RsConstants.Resolutions)
 
-    room_register("roomInit")
-    room_register("roomLogo")
-    room_register("roomIntro")
-    room_register("roomMain")
-    room_register("roomDemo")
-    room_register("roomStage01")
-    room_register("roomStage02")
-    room_register("roomStage03")
-
     # Test
     TestLayer1 = RsLayer("Test 1")
     TestLayer2 = RsLayer("Test 2")
@@ -69,6 +62,7 @@ def init():
     print("x = " + str(TestInstance.x))
 
     # Startup
+    Game.init()
     Rooms = RsContainers.RoomOrder
     RsRoom = Rooms[0]
     if not RsRoom:
