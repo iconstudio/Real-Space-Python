@@ -1,3 +1,5 @@
+from typing import Optional
+
 from RsCore.layer import RsLayer
 
 
@@ -8,8 +10,8 @@ class RsScene(object):
     paused: bool
     EveryInstancesPot: list
     SpecificInstancesPot: dict[str, list]
-    before = None
-    next = None
+    before: Optional[RsScene] = None
+    next: Optional[RsScene] = None
 
     def __init__(self, name: str):
         ...

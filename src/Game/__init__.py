@@ -4,7 +4,10 @@ from RsCore.prefab import RsPrefab
 from RsCore.instance import RsObject
 from RsCore.sprite import RsSprite
 from RsCore import constants as RsConstants, containers as RsContainers
-from RsCore.assets import *
+from RsCore.assets import room_register, instance_create
+
+import Game.game_cfg as GameConstants
+
 
 
 def init():
@@ -19,7 +22,7 @@ def init():
 
     # Test
     from Game.spaceships import oSpaceShip
-    TestInstance = instance_create(oSpaceShip, "Player_7", 0, 50)
+    TestInstance = instance_create(oSpaceShip, GameConstants.LAYERS.PLAYER_7, 0, 50)
     print(TestInstance)
 
 
