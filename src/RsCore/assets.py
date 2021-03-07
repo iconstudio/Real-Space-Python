@@ -15,6 +15,9 @@ __all__ = [
     "instance_create"
 ]
 
+RsRoom: Optional[RsScene]
+RsLastRoom: Optional[RsScene]
+
 
 def object_register(name: str) -> RsPrefab:
     Temp = RsPrefab(name)
@@ -50,6 +53,7 @@ def room_register(name: str):
 
     RsContainers.RoomOrder.append(NewRoom)
     RsContainers.RoomPot[name] = NewRoom
+    return NewRoom
 
 
 def room_get(id: Union[int, str]) -> Optional[RsScene]:
@@ -96,25 +100,25 @@ def layer_find(name: str) -> Optional[RsLayer]:
     if RsRoom and name in GameConstants.layer_default:
         Where = RsRoom.trees[name]
         return Where
+    return None
 
 
 def instance_create(prefab: Type[RsObject], layer: Union[str, RsLayer], x: float = 0, y: float = 0) -> Optional[RsObject]:
     global RsRoom
     if RsRoom:
+        Layer = None
         if type(layer) is str:
             Layer = layer_find(layer)
-            if not layer:
-                return
+            if not Layer:
+                return None
+        
+        if Layer:
             Instance = prefab(RsRoom, Layer, x, y)
-        else:
-            Instance = prefab(RsRoom, layer, x, y)
-        Instance.onAwake()
-        RsRoom.SpecificInstancesPot[prefab.name].append(Instance)
-        RsRoom.EveryInstancesPot.append(Instance)
-
-        return Instance
-    else:
-        return None
+            Instance.onAwake()
+            RsRoom.SpecificInstancesPot[prefab.link_original.name].append(Instance)
+            RsRoom.EveryInstancesPot.append(Instance)
+            return Instance
+    return None
 
 
 def instance_destroy(instance: RsObject):
